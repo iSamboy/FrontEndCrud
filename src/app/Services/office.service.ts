@@ -10,6 +10,7 @@ import { Office } from '../Interfaces/office';
 })
 export class OfficeService {
 
+  // To connect to our API - /office/list
   private endpoint:string = environment.endPoint;
   private apiUrl:string = this.endpoint + "office/";
 
