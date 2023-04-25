@@ -1,7 +1,10 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
+// Importing our Interface
+import { Employee } from './Interfaces/employee';
+import { EmployeeService } from './Services/employee.service';
 
 
 @Component({
@@ -9,9 +12,17 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+export class AppComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = ['FullName', 'Office', 'Salary', 'ContractDate', 'Actions'];
+  dataSource = new MatTableDataSource<Employee>();
+
+  constructor(private _employeeService:EmployeeService){
+
+  }
+
+  ngOnInit(): void {
+     this.showEmployees(); 
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -22,6 +33,16 @@ export class AppComponent implements AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  // To take the information from our API/Database
+  showEmployees(){
+    this._employeeService.getList().subscribe({
+      next:(dataResponse)=>{
+        console.log(dataResponse)
+        this.dataSource.data = dataResponse;
+      },error:(e)=>{}
+    })
   }
 }
 
