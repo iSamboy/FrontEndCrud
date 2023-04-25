@@ -1,6 +1,11 @@
 <div class="main" style="width: 70%; margin: 40px auto">
   <h1>List of Employees</h1>
 
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
   
