@@ -84,7 +84,7 @@ export class DialogAddEditComponent implements OnInit {
       fullName: this.formEmployee.value.fullName,
       idOffice: this.formEmployee.value.idOffice,
       salary: this.formEmployee.value.salary,
-      contractDate: this.formEmployee.value.contractDate
+      contractDate: moment(this.formEmployee.value.contractDate).format("DD/MM/YYYY") 
     }
 
     this._employeeService.add(model).subscribe({
