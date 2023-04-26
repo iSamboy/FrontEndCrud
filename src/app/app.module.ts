@@ -29,10 +29,12 @@ import {MatIconModule} from '@angular/material/icon';             // Icons
   // Modals
 import {MatDialogModule} from '@angular/material/dialog';         // Modal dialogs
   // Grid list
-import {MatGridListModule} from '@angular/material/grid-list';    // Grid lists
+import {MatGridListModule} from '@angular/material/grid-list';
+import { DialogAddEditComponent } from './Dialogs/dialog-add-edit/dialog-add-edit.component';    // Grid lists
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogAddEditComponent
   ],
   imports: [
     BrowserModule,

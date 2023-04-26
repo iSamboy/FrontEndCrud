@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+
+import { DialogAddEditComponent } from './Dialogs/dialog-add-edit/dialog-add-edit.component';
 
 // Importing our Interface
 import { Employee } from './Interfaces/employee';
@@ -16,7 +19,10 @@ export class AppComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['FullName', 'Office', 'Salary', 'ContractDate', 'Actions'];
   dataSource = new MatTableDataSource<Employee>();
 
-  constructor(private _employeeService:EmployeeService){
+  constructor(
+    private _employeeService:EmployeeService,
+    public dialog: MatDialog
+    ){
 
   }
 
@@ -43,6 +49,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.dataSource.data = dataResponse;
       },error:(e)=>{}
     })
+  }
+
+  openDialog() {
+    this.dialog.open(DialogAddEditComponent);
   }
 }
 
