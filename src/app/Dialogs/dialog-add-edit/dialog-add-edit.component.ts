@@ -88,6 +88,8 @@ export class DialogAddEditComponent implements OnInit {
       contractDate: moment(this.formEmployee.value.contractDate).format("DD/MM/YYYY") 
     }
 
+    if(this.dataEmployee == null){
+      // To add employee
     this._employeeService.add(model).subscribe({
       next:(data)=>{
         this.showAlert("Created Employee", "Done");
@@ -95,10 +97,35 @@ export class DialogAddEditComponent implements OnInit {
       },error:(e)=>{
         this.showAlert("Could not create", "Error");
       }
-    })
+      })
+    }else{
+      // To update employee
+    this._employeeService.update(this.dataEmployee.idPerson,model).subscribe({
+      next:(data)=>{
+        this.showAlert("Edited Employee", "Done");
+        this.dialogReference.close("edited");
+      },error:(e)=>{
+        this.showAlert("Could not edit", "Error");
+      }
+      })
+    }
+
+    
   }
 
+  // For the edit function (window)
   ngOnInit(): void {
+    if(this.dataEmployee){
+      this.formEmployee.patchValue({
+        fullName:this.dataEmployee.fullName,
+        idOffice: this.dataEmployee.idOffice,
+        salary: this.dataEmployee.salary,
+        contractDate: moment(this.dataEmployee.contractDate, "DD/MM/YYYY")
+      })
+
+      this.tittleAction = "Edit";
+      this.buttonAction = "Update";
+    }
   }
 
 }
