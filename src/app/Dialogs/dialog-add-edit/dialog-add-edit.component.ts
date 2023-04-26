@@ -78,8 +78,23 @@ export class DialogAddEditComponent implements OnInit {
 
   // method to send data to the table and register employee
   addEditEmployee(){
-    console.log(this.formEmployee)
     console.log(this.formEmployee.value)
+    const model:Employee={
+      idPerson: 0,
+      fullName: this.formEmployee.value.fullName,
+      idOffice: this.formEmployee.value.idOffice,
+      salary: this.formEmployee.value.salary,
+      contractDate: this.formEmployee.value.contractDate
+    }
+
+    this._employeeService.add(model).subscribe({
+      next:(data)=>{
+        this.showAlert("Created Employee", "Done");
+        this.dialogReference.close("created");
+      },error:(e)=>{
+        this.showAlert("Could not create", "Error");
+      }
+    })
   }
 
   ngOnInit(): void {
