@@ -30,11 +30,13 @@ import {MatIconModule} from '@angular/material/icon';             // Icons
 import {MatDialogModule} from '@angular/material/dialog';         // Modal dialogs
   // Grid list
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DialogAddEditComponent } from './Dialogs/dialog-add-edit/dialog-add-edit.component';    // Grid lists
+import { DialogAddEditComponent } from './Dialogs/dialog-add-edit/dialog-add-edit.component';
+import { DialogDeleteComponent } from './Dialogs/dialog-delete/dialog-delete.component';    // Grid lists
 @NgModule({
   declarations: [
     AppComponent,
-    DialogAddEditComponent
+    DialogAddEditComponent,
+    DialogDeleteComponent
   ],
   imports: [
     BrowserModule,
