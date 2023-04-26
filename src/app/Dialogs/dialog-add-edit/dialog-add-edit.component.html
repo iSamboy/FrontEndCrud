@@ -1,5 +1,48 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<h1 mat-dialog-title>{{tittleAction}} Employee</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formEmployee">
+        <!-- Adding grid list format from Angular Material -->
+        <mat-grid-list cols="1" rowHeight="80px">
+            
+            <!-- Full name petition -->
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input matInput formControlName="fullName" autocomplete="off">
+                  </mat-form-field>
+            </mat-grid-tile>
+            <!-- Office Name petition -->
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Office</mat-label>
+                    <mat-select formControlName="idOffice">
+                      <mat-option *ngFor="let item of listOffice" [value]="item.idOffice">
+                        {{item.officeName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <!-- Salary  petition -->
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Salary</mat-label>
+                    <input matInput formControlName="salary" autocomplete="off" type="number">
+                  </mat-form-field>
+            </mat-grid-tile>
+            <!-- Contract Date petition -->
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Contract date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="contractDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+    </form>
+
+</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
 </div>
