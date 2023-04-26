@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, inject } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 
 // Adding Angular Material Resources
 import {FormBuilder,FormGroup,Validators} from '@angular/forms'; // Forms
@@ -52,7 +52,7 @@ export class DialogAddEditComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _officeService: OfficeService,
     private _employeeService: EmployeeService,
-    @Inject(MAT_DIALOG_DATA) public dataEmployee:Employee
+    @Inject(MAT_DIALOG_DATA) public dataEmployee:Employee // To receive data
   ) { 
     this.formEmployee=this.fb.group({
       fullName:['',Validators.required],

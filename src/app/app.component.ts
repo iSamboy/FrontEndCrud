@@ -3,11 +3,15 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 
+// Importing our dialogs
 import { DialogAddEditComponent } from './Dialogs/dialog-add-edit/dialog-add-edit.component';
+import { DialogDeleteComponent } from './Dialogs/dialog-delete/dialog-delete.component';
 
 // Importing our Interface
 import { Employee } from './Interfaces/employee';
 import { EmployeeService } from './Services/employee.service';
+
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,7 +25,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   constructor(
     private _employeeService:EmployeeService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar:MatSnackBar
     ){
 
   }
@@ -71,6 +76,31 @@ export class AppComponent implements AfterViewInit, OnInit {
     }).afterClosed().subscribe(result=>{
       if (result === "edited"){
         this.showEmployees();
+      }
+    })
+  }
+
+  showAlert(msg: string, action: string) {
+    this._snackBar.open(msg, action,{
+      horizontalPosition:'end',
+      verticalPosition:'top',
+      duration: 3000 
+    });
+  }
+
+  // To delete employees
+  dialogDeleteEmployee(dataEmployee:Employee){
+    this.dialog.open(DialogDeleteComponent,{
+      disableClose:true,
+      data: dataEmployee
+    }).afterClosed().subscribe(result=>{
+      if (result === "delete"){
+        this._employeeService.delete(dataEmployee.idPerson).subscribe({
+          next:(data)=>{
+            this.showAlert("Deleted Employee","Done");
+            this.showEmployees();
+          },error:(e)=>{}
+        })
       }
     })
   }
