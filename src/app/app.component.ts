@@ -50,7 +50,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       },error:(e)=>{}
     })
   }
-
+  // To add employees
   dialogNewEmployee() {
     this.dialog.open(DialogAddEditComponent,{
       disableClose:true,
@@ -61,4 +61,18 @@ export class AppComponent implements AfterViewInit, OnInit {
       }
     })
   }
+
+  // To edit employees
+  dialogEditEmployee(dataEmployee:Employee) {
+    this.dialog.open(DialogAddEditComponent,{
+      disableClose:true,
+      width:"350px",
+      data: dataEmployee
+    }).afterClosed().subscribe(result=>{
+      if (result === "edited"){
+        this.showEmployees();
+      }
+    })
+  }
+
 }

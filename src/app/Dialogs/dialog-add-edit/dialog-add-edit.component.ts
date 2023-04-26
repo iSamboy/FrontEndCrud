@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, inject } from '@angular/core';
 
 // Adding Angular Material Resources
 import {FormBuilder,FormGroup,Validators} from '@angular/forms'; // Forms
-import {MatDialogRef} from '@angular/material/dialog';  // Dialogs
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';  // Dialogs
 
 import {MatSnackBar} from '@angular/material/snack-bar'; // Snack Bars
 import {MAT_DATE_FORMATS} from '@angular/material/core'; // Date Format
@@ -51,7 +51,8 @@ export class DialogAddEditComponent implements OnInit {
     private fb:FormBuilder, 
     private _snackBar: MatSnackBar,
     private _officeService: OfficeService,
-    private _employeeService: EmployeeService
+    private _employeeService: EmployeeService,
+    @Inject(MAT_DIALOG_DATA) public dataEmployee:Employee
   ) { 
     this.formEmployee=this.fb.group({
       fullName:['',Validators.required],
